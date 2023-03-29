@@ -1,0 +1,36 @@
+import java.util.*;
+interface a{
+    float pi=3.14f;
+}
+class Constant implements a{
+    void circle(int n){
+        System.out.println(n*pi);
+    }
+    void cylinder(int h, int r){
+        System.out.println(2*pi*r*h+2*pi*r*r);
+    }
+}
+class Main{
+    public static void main(String args[]){
+    Scanner sc=new Scanner(System.in);
+    System.out.println("ENter 1 for circle 2 for Cylinder");
+    int c=sc.nextInt();
+    Constant a=new Constant();
+    if(c==2){
+        System.out.println("Enter the radius");
+        int radius=sc.nextInt();
+        System.out.println("ENter the height");
+        int height=sc.nextInt();
+        a.cylinder(height, radius);
+    }
+    else if(c==1){
+        System.out.println("Enter the radius");
+        int radius=sc.nextInt();
+        a.circle(radius);
+    }
+    else{
+        System.out.println("Wrong choice");
+    }
+    
+    }
+}

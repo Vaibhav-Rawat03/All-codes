@@ -1,0 +1,182 @@
+class checkpalindrome{
+    Node head=null;
+    class Node{
+        int data;
+        Node next;
+
+        Node(int data){
+            this.data=data;
+            this.next=null;
+        }
+    }
+    
+    //add first
+    public void addfirst(int data){
+        Node newNode=new Node(data);
+        if(head==null){
+        head=newNode;
+        return;
+        }
+        else{
+            newNode.next=head;
+            head=newNode;
+            return;
+        }
+    }
+
+    public void addlast(int data){
+        Node newNode=new Node(data);
+        Node currNode=head;
+        if(head == null){
+        newNode=head;
+        return;
+        }
+        else{
+            while(currNode.next !=null){
+                currNode=currNode.next;
+            }
+            currNode.next=newNode;
+        }
+    }
+
+    public void deletefirst(){
+        if(head==null){
+            System.out.print("Empty linked list");
+        }
+        else{
+            head=head.next;
+        }
+    }
+
+    public void deletelast(){
+        if(head==null){
+            System.out.print("Empty linked list");
+        }
+        else{
+            Node last=head.next;
+            Node slast=head;
+            while(last.next!=null){
+                last=last.next;
+                slast=slast.next;
+            }
+            slast.next=null;
+        }
+    }
+
+    void addbtw(int data,int dpos){
+        Node newNode=new Node(data);
+        Node currNode=head;
+        if(head==null ){
+            head=newNode;
+        }
+        while(currNode!=null){
+            if(currNode.data==dpos){
+                newNode.next=currNode.next;
+                currNode.next=newNode;
+                break;
+            }
+            currNode=currNode.next;
+        }
+        if(currNode==null){
+            System.out.print("Element does not exist enter valid element");
+        }
+        return;
+    }
+    
+    void deletebtw(int data){
+        if(head==null){
+            return;
+        }
+        else{
+            if(head.data==data){
+                head=head.next;
+            }
+            else{
+            Node prevNode=head;
+            Node currNode=head.next;
+            while(currNode!=null){
+                if(currNode.data==data){
+                    prevNode.next=currNode.next;
+                    currNode.next=null;
+                    break;
+                }
+                currNode=currNode.next;
+                prevNode=prevNode.next;
+            }
+            if(currNode==null){
+                System.out.println("Element does not exist in list");
+            }
+            }
+        }
+    }
+    public Node middle(Node head){
+        Node turtle=head;
+        Node rabbit=head;
+        while(rabbit!=null && rabbit.next.next!=null){
+                rabbit=rabbit.next.next;
+                turtle=turtle.next;
+            }
+        return turtle;
+    }
+    
+    public Node rev(Node head){
+        Node currNode=head.next;
+        Node prevNode=head;
+        
+        while(currNode.next!=null){
+            Node nextNode=currNode.next;
+            prevNode=currNode;
+            currNode=nextNode;
+            
+            currNode=currNode.next;
+            prevNode=prevNode.next;
+        }
+        head.next=null;
+        head=currNode;
+        
+        return head;
+    }
+    
+    public void palindrome(Node head){
+        if(head==null || head.next==null){
+            //return true;
+            System.out.println("true");
+        }
+        else{
+            Node mid=middle(head);
+            Node newhead=rev(mid);
+            Node currNode=head;
+            
+            while(currNode!=null || newhead!=null){
+                if(currNode.data!=newhead.data){
+                //return false;
+                System.out.println("false");
+            }
+            currNode=currNode.next;
+            newhead=newhead.next;
+            }
+            //return true;
+            System.out.println("true");
+        }
+    } 
+
+    public void Print(){
+        Node currNode=head;
+        if(head ==null){
+            System.out.println("Empty Linked List");
+        }
+        while(currNode != null){
+            System.out.println(currNode.data);
+            currNode=currNode.next;
+        }
+    }
+    public static void main(String args[]){
+        checkpalindrome obj=new checkpalindrome();
+        obj.addfirst(0);
+        obj.addfirst(1);
+        obj.addlast(10);
+        obj.addlast(11);
+        obj.palindrome(obj.head);
+        obj.Print();
+    }
+}
